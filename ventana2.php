@@ -1,7 +1,3 @@
-ini_set('display_errors', 1);
-error_reporting(E_ALL); 
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,10 +12,19 @@ error_reporting(E_ALL);
             font-family: Arial, sans-serif;
         }
         .header {
-            background-color: #3498db; /* Azul más claro */
+            background-color: #3498db;
             padding: 20px;
-            text-align: center;
             color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            height: 50px;
+        }
+        .title {
+            text-align: center;
+            flex-grow: 1;
         }
         .content {
             background-color: #ffffff;
@@ -35,21 +40,22 @@ error_reporting(E_ALL);
             margin-top: 20px;
         }
         .bg-blue {
-            background-color: #3498db; /* Azul más claro */
+            background-color: #3498db;
             color: #ffffff;
         }
         .bg-light-blue {
-            background-color: #e6f2ff; /* Azul claro */
+            background-color: #e6f2ff;
         }
         .btn-blue {
-            background-color: #3498db; /* Azul más claro */
+            background-color: #3498db;
             color: #ffffff;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1><i class="bi bi-gear-fill"></i> Interfaz de Administrador</h1>
+        <img src="images/WhatsApp Image 2024-05-03 at 9.21.36 AM.jpeg" alt="Logo" class="logo">
+        <h1 class="title"><i class="bi bi-gear-fill"></i> Gestión de usuarios</h1>
     </div>
     <div class="container">
         <div class="row">
@@ -97,6 +103,9 @@ error_reporting(E_ALL);
                         <tbody>
                             <?php
                             include "modelo/conexion.php";
+                            include "controlador/eliminar_persona.php";
+
+
                             $sql=$conexion->query("select * from usuariof");
                             while($datos=$sql->fetch_object()){ ?>
                                 <tr>
@@ -104,8 +113,8 @@ error_reporting(E_ALL);
                                    <td><?=$datos->nombre?></td>
                                    <td><?=$datos->cargo?></td>
                                     <td>
-                                    <button class="btn btn-sm btn-primary"><i class="bi bi-pencil-fill"></i></button>
-                                    <button class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i></button>
+                                    <a href="modificar_persona.php?id=<?=$datos->codigo?>" class="btn btn-sm btn-success"><i class="bi bi-pencil-fill"></i></button>
+                                    <a href="ventana2.php?id=<?=$datos->codigo?>" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i></button>
                                     </td>
                                 </tr>
                              <?php }
