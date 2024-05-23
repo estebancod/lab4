@@ -1,13 +1,11 @@
 <?php
-if(!empty($_GET["id"])){
-    $id=$_GET["id"];
-    $sql=$conexion->query("delete from usuariof where codigo=$id");
-    if($sql==1){
-        echo'<div>Persona eliminado correctamente</div>';
-    }else{
-        echo '<div>Error al eliminar</div>';
-        echo $id;
-    }
-}
+include('conexion.php');
 
+$codigo = $_REQUEST['codigo'];
+$sql = "DELETE FROM usuariof WHERE codigo= '$codigo'";
+$query = mysqli_query($conexion, $sql);
+
+if ($query) {
+    header('location: ../ventana2.php');
+}
 ?>

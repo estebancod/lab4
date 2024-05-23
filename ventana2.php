@@ -131,7 +131,7 @@
                                     <th scope="row"><?php echo $fila['cargo'] ?></th>
                                     <th scope="row">
                                         <a href="modificar_persona.php?codigo=<?php echo $fila['codigo'] ?>" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>
-                                        <a href="controlador/eliminar_persona.php?codigo=<?php echo $fila['codigo'] ?>" class="btn btn-warning"><i class="bi bi-trash-fill"></i></a>
+                                        <a href="controlador/eliminar_persona.php?codigo=<?php echo $fila['codigo'] ?>" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
                                     </th>
                                 </tr>
                             <?php
