@@ -66,7 +66,7 @@
 <body>
     <div class="header">
         <img src="images/WhatsApp Image 2024-05-03 at 9.21.36 AM.jpeg" alt="Logo" class="logo">
-        <h1 class="title"><i class="bi bi-gear-fill"></i> Gestión de usuarios</h1>
+        <h1 class="title"><i class="bi bi-gear-fill"></i> Gestión de Usuarios</h1>
     </div>
     <div class="container">
         <div class="row">
