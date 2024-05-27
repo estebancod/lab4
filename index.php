@@ -1,96 +1,95 @@
 
 <!DOCTYPE html>
-<html lang="en">
-<head> 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+<html>
+<head>
+    <title>Control de LED</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #007bff; /* Fondo azul para todo el body */
-            color: #000000; /* Color de texto blanco */
-            padding: 0;
-            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* Altura total de la ventana */
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0; 
         }
-        .login-container {
-            max-width: 400px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+        .button-container {
+            display: flex;
+            gap: 20px;
         }
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        .form-group label {
+
+        button {
+            font-size: 24px;
             font-weight: bold;
-        }
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        .btn-primary {
-            display: inline-block;
             padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
+            border-radius: 10px;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .on {
+            background-color: #4CAF50;
+        }
+
+        .off {
+            background-color: #F44336;
+        }
+
+        button:hover {
+            transform: scale(1.1);
         }
     </style>
+    <script>
+        function enviarComando(comando) {
+            fetch(`index.php?estado=${comando}`)
+                .then(response => response.text())
+                .then(data => {
+                    console.log('Respuesta del servidor:', data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
 </head>
 <body>
-    <div class="login-container">
-        <h2>LOGIN</h2>
-        <form id="loginForm" action="process_login.php" method="POST">
-            <div class="form-group">
-                <label for="username">Nombre:</label>
-                <input type="text" id="username" name="username" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="userID">ID de Usuario:</label>
-                <input type="text" id="userID" name="userID" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-primary" id="submitButton">Ingresar</button>
-        </form>
+    <div class="button-container">
+        <button class="on" onclick="enviarComando('ON')">ON</button>
+        <button class="off" onclick="enviarComando('OFF')">OFF</button>
     </div>
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            // Evitar el envío del formulario por defecto
-            event.preventDefault();
-
-
-
-           // Obtener el valor del campo de ID de Usuario
-           var userIDValue = document.getElementById('userID').value;
-
-            // Redirigir según el valor del campo de ID de Usuario
-             if (userIDValue === '1') {
-               window.location.href = 'ventana.php';
-            } else if (userIDValue === '2') {
-              window.location.href = 'ventana2.php';
-            } else {
-    // Manejar otro caso si es necesario
-    alert('ID de usuario no válido');
-}
-        });
-    </script>
-
-
 </body>
 </html>
+
+<?php
+$estadoArchivo = 'estado_led.txt';
+
+// Comprobar si el archivo existe, si no, crear uno con estado "OFF"
+if (!file_exists($estadoArchivo)) {
+    file_put_contents($estadoArchivo, 'OFF');
+
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['estado'])) {
+    $estado = $_GET['estado'];
+
+    // Guardar el estado en un archivo (o base de datos)
+    file_put_contents($estadoArchivo, $estado); //manda el ON o OFF en la pagina
+
+    // Enviar respuesta
+    //echo $estado;
+    exit();
+}
+
+// Leer el estado actual del LED
+$estadoActual = file_get_contents($estadoArchivo);
+// Solo imprimir la respuesta, no el contenido HTML
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    //echo $estadoActual;
+
+    exit();
+}
+
+?>
