@@ -94,8 +94,8 @@
                             <label for="cargo"><i class="bi bi-briefcase-fill"></i> Puesto</label>
                             <select class="form-control" id="cargo" name="cargo">
                                 <option value="">Selecciona tu puesto</option>
-                                <option value="unidades">Unidad</option>
-                                <option value="farmacia">Farmacia</option>
+                                <option value="Unidad">Unidad</option>
+                                <option value="Farmacia">Farmacia</option>
                             </select>
                         </div>
 
@@ -117,7 +117,6 @@
                         </thead>
                         <tbody>
                             <?php
-                            $contador = 1;
                             include("controlador/conexion.php");
                             $sql = "SELECT * FROM usuariof";
                             $query = mysqli_query($conexion, $sql);
@@ -125,7 +124,6 @@
                             while ($fila = mysqli_fetch_array($query)) {
                             ?>
                                 <tr>
-                                    <th scope="row"><?php echo $contador; ?></th>
                                     <th scope="row"><?php echo $fila['codigo'] ?></th>
                                     <th scope="row"><?php echo $fila['nombre'] ?></th>
                                     <th scope="row"><?php echo $fila['cargo'] ?></th>
@@ -135,7 +133,6 @@
                                     </th>
                                 </tr>
                             <?php
-                                $contador++;
                             }
                             ?>
                         </tbody>

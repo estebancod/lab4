@@ -45,8 +45,10 @@
 </head>
 <body>
   <header>
-    <button>Solicitudes</button>
-    <button>Inventarios</button>
+    <a href="modificar_persona.php">
+      <button>Solicitudes</button></a>
+    <a href="gestion_medicamento.php">
+      <button>Inventarios</button></a>
     <button>Gestión de Cápsulas</button>
   </header>
   
