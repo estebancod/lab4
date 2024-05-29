@@ -103,7 +103,7 @@
             </div>
             <div class="col-md-8">
                 <div class="content">
-                    <h3 class="text-center bg-blue text-white rounded-top p-2">Lista de Personas</h3>
+                    <h3 class="text-center bg-blue text-white rounded-top p-2">Lista de Medicamentos</h3>
                     <table class="table table-striped">
                         <thead class="bg-light-blue">
                             <tr>
