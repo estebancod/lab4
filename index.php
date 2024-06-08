@@ -83,7 +83,7 @@
              if (userIDValue === '1') {
                window.location.href = 'interfaz_farmacia.php';
             } else if (userIDValue === '2') {
-              window.location.href = 'usuario_farmacia.php';
+              window.location.href = 'usuario_unidades.php';
             } else {
     // Manejar otro caso si es necesario
     alert('ID de usuario no válido');

@@ -45,7 +45,7 @@
 </head>
 <body>
   <header>
-    <a href="modificar_persona.php">
+    <a href="solicitudes_unidades.php">
       <button>Solicitudes</button></a>
     <a href="gestion_medicamento.php">
       <button>Inventarios</button></a>
@@ -54,7 +54,7 @@
   
   <main>
     <!-- Aquí se mostraría el contenido relevante -->
-    <h1>Bienvenido a la interfaz gráfica</h1>
+    <h1>Bienvenido a la Medired express</h1>
     <p>Aquí podrás gestionar tus solicitudes, inventarios y cápsulas.</p>
   </main>
 </body>

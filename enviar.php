@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +9,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0; 
+            background-color: #f0f0f0;
         }
 
         .button-container {
@@ -43,22 +42,22 @@
         }
     </style>
     <script>
-        function enviarComando(comando) {
-            fetch(`index.php?estado=${comando}`)
+        function enviarEstado(estado) {
+            fetch('enviar.php?estado=' + estado)
                 .then(response => response.text())
-                .then(data => {
-                    console.log('Respuesta del servidor:', data);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+                .then(data => console.log(data))
+                .catch(error => console.error(error));
+        }
+
+        function setEstado(valor) {
+            enviarEstado(valor);
         }
     </script>
 </head>
 <body>
     <div class="button-container">
-        <button class="on" onclick="enviarComando('ON')">ON</button>
-        <button class="off" onclick="enviarComando('OFF')">OFF</button>
+        <button class="on" onclick="setEstado('ON')">ON</button>
+        <button class="off" onclick="setEstado('OFF')">OFF</button>
     </div>
 </body>
 </html>
@@ -66,30 +65,16 @@
 <?php
 $estadoArchivo = 'estado_led.txt';
 
-// Comprobar si el archivo existe, si no, crear uno con estado "OFF"
-if (!file_exists($estadoArchivo)) {
-    file_put_contents($estadoArchivo, 'OFF');
-
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['estado'])) {
+// Comprobar si se recibió el parámetro "estado" en la URL
+if (isset($_GET['estado'])) {
     $estado = $_GET['estado'];
 
-    // Guardar el estado en un archivo (o base de datos)
-    file_put_contents($estadoArchivo, $estado); //manda el ON o OFF en la pagina
+    // Guardar el estado en el archivo
+    file_put_contents($estadoArchivo, $estado);
 
-    // Enviar respuesta
-    //echo $estado;
-    exit();
+    // Enviar una respuesta al cliente
+    echo "Estado guardado: " . $estado;
+} else {
+    //echo "No se recibió el estado.";
 }
-
-// Leer el estado actual del LED
-$estadoActual = file_get_contents($estadoArchivo);
-// Solo imprimir la respuesta, no el contenido HTML
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    //echo $estadoActual;
-
-    exit();
-}
-
 ?>
