@@ -80,11 +80,13 @@
            var userIDValue = document.getElementById('userID').value;
 
             // Redirigir según el valor del campo de ID de Usuario
-             if (userIDValue === '1') {
+             if (userIDValue === '2') {
                window.location.href = 'interfaz_farmacia.php';
-            } else if (userIDValue === '2') {
-              window.location.href = 'usuario_farmacia.php';
-            } else {
+            } else if (userIDValue === '1') {
+              window.location.href = 'ventana2.php';
+            } else if (userIDValue === '3') {
+              window.location.href = 'usuario_farmacia.php';}
+            else {
     // Manejar otro caso si es necesario
     alert('ID de usuario no válido');
 }

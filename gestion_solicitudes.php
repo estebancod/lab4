@@ -115,33 +115,32 @@
         include("controlador/conexion_med.php");
         $sql = "SELECT * FROM medicamentos";
         $query = mysqli_query($conexion, $sql);
+        $counter = 1;
 
         while ($fila = mysqli_fetch_array($query)) {
+            $unique_id = 'cantidad' . $counter;
             ?>
                 <tr>
                     <td><?php echo $fila['nombre'] ?></td>
-                    <?php $names = $fila['nombre'] ?>
-                    <?php echo $names ?>
                     <td><?php echo $fila['descripcion'] ?></td>
                     <td><?php echo $fila['fecha_caducidad'] ?></td>
                     <td><?php echo $fila['cantidad'] ?></td>
                     <td class="cantidad">
-                        <button onclick="disminuirCantidad(this)">-</button>
-                        <span id="cantidad3535">1</span>
-                        <button onclick="aumentarCantidad(this)">+</button>
-                        <button class="agregar-btn" onclick="agregarMedicamento(this, '<?php echo $names; ?>', '<?php echo $fila['descripcion']; ?>', '<?php echo $fila['fecha_caducidad']; ?>', document.getElementById('cantidad3535').textContent)">Agregar</button>
-                        //con echo $fila[''] manipulo la variable, puede ser nombre o descripcion
-
+                        <button onclick="disminuirCantidad('<?php echo $unique_id; ?>')">-</button>
+                        <span id="<?php echo $unique_id; ?>">1</span>
+                        <button onclick="aumentarCantidad('<?php echo $unique_id; ?>')">+</button>
+                        <button class="agregar-btn" onclick="agregarMedicamento('<?php echo $fila['nombre']; ?>', '<?php echo $fila['descripcion']; ?>', '<?php echo $fila['fecha_caducidad']; ?>', document.getElementById('<?php echo $unique_id; ?>').textContent)">Agregar</button>
                     </td>
                 </tr>
             <?php
+            $counter++;
         }
     ?>
     </tbody>
     </table>
 
     <h3 class="selected-title">Medicamentos Seleccionados</h3>
-    <table id="medicamentosSeleccionados">
+    <table id="medicamentosSeleccionados" action="insertar_solicitudes.php" method="POST">
     <thead>
         <tr>
             <th>Nombre</th>
@@ -153,21 +152,20 @@
     <tbody>
     </tbody>
     </table>
-
     <button class="enviar-btn">Enviar</button>
 
     <script>
         // Función para aumentar la cantidad
-        function aumentarCantidad(btn) {
-            var cantidadSpan = btn.parentNode.querySelector('span');
+        function aumentarCantidad(id) {
+            var cantidadSpan = document.getElementById(id);
             var cantidad = parseInt(cantidadSpan.textContent);
             cantidad++;
             cantidadSpan.textContent = cantidad;
         }
 
         // Función para disminuir la cantidad
-        function disminuirCantidad(btn) {
-            var cantidadSpan = btn.parentNode.querySelector('span');
+        function disminuirCantidad(id) {
+            var cantidadSpan = document.getElementById(id);
             var cantidad = parseInt(cantidadSpan.textContent);
             if (cantidad > 1) {
                 cantidad--;
@@ -176,7 +174,7 @@
         }
 
         // Función para agregar medicamento a la tabla de seleccionados
-        function agregarMedicamento(btn, nombre, descripcion, fechaCaducidad, cantidad) {
+        function agregarMedicamento(nombre, descripcion, fechaCaducidad, cantidad) {
             var tableBody = document.getElementById("medicamentosSeleccionados").getElementsByTagName("tbody")[0];
             var newRow = tableBody.insertRow();
             var nombreCell = newRow.insertCell(0);
