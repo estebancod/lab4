@@ -8,7 +8,7 @@ Integración de hardware: Utilizando comunicación inalámbrica (WiFi), MediRed 
 
 Características principales
 
-Gestión de usuario y medicamentos: Registro, actualización y seguimiento de información..
+Gestión de usuario y medicamentos: Registro, actualización y seguimiento de información.
 Control del sistemma de transporte neumatico: Activación del sistema por medio de protocolo wifi.
 Seguridad y privacidad: Implementación de medidas de seguridad robustas para proteger la información confidencial de los pacientes.
 
