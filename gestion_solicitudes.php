@@ -43,7 +43,7 @@
             border: none;
             cursor: pointer;
         }
-        .agregar-btn {
+        .agregar-btn, .extra-btn {
             background-color: #3498db;
             color: white;
             padding: 8px 16px;
@@ -122,14 +122,27 @@
             ?>
                 <tr>
                     <td><?php echo $fila['nombre'] ?></td>
+<<<<<<< HEAD
+=======
+                    <?php $names = $fila['nombre'] ?>
+>>>>>>> 02b878f289a168805d0fa26d5e2f5922a609b271
                     <td><?php echo $fila['descripcion'] ?></td>
                     <td><?php echo $fila['fecha_caducidad'] ?></td>
-                    <td><?php echo $fila['cantidad'] ?></td>
+                    <td class="cantidad-disponible"><?php echo $fila['cantidad'] ?></td>
                     <td class="cantidad">
+<<<<<<< HEAD
                         <button onclick="disminuirCantidad('<?php echo $unique_id; ?>')">-</button>
                         <span id="<?php echo $unique_id; ?>">1</span>
                         <button onclick="aumentarCantidad('<?php echo $unique_id; ?>')">+</button>
                         <button class="agregar-btn" onclick="agregarMedicamento('<?php echo $fila['nombre']; ?>', '<?php echo $fila['descripcion']; ?>', '<?php echo $fila['fecha_caducidad']; ?>', document.getElementById('<?php echo $unique_id; ?>').textContent)">Agregar</button>
+=======
+                        <button onclick="disminuirCantidad(this)">-</button>
+                        <span class="cantidad-value">1</span>
+                        <button onclick="aumentarCantidad(this)">+</button>
+                        <button class="agregar-btn" onclick="agregarMedicamento(this, '<?php echo $names; ?>', '<?php echo $fila['descripcion']; ?>', '<?php echo $fila['fecha_caducidad']; ?>', this.parentNode.querySelector('.cantidad-value').textContent)">Agregar</button>
+                        <button class="extra-btn">C</button>
+                        <button class="extra-btn">P</button>
+>>>>>>> 02b878f289a168805d0fa26d5e2f5922a609b271
                     </td>
                 </tr>
             <?php
@@ -152,20 +165,35 @@
     <tbody>
     </tbody>
     </table>
+<<<<<<< HEAD
     <button class="enviar-btn">Enviar</button>
 
     <script>
         // Función para aumentar la cantidad
         function aumentarCantidad(id) {
             var cantidadSpan = document.getElementById(id);
+=======
+
+    <button class="enviar-btn" onclick="enviarMedicamentos()">Enviar</button>
+
+    <script>
+        // Función para aumentar la cantidad
+        function aumentarCantidad(btn) {
+            var cantidadSpan = btn.parentNode.querySelector('.cantidad-value');
+>>>>>>> 02b878f289a168805d0fa26d5e2f5922a609b271
             var cantidad = parseInt(cantidadSpan.textContent);
             cantidad++;
             cantidadSpan.textContent = cantidad;
         }
 
         // Función para disminuir la cantidad
+<<<<<<< HEAD
         function disminuirCantidad(id) {
             var cantidadSpan = document.getElementById(id);
+=======
+        function disminuirCantidad(btn) {
+            var cantidadSpan = btn.parentNode.querySelector('.cantidad-value');
+>>>>>>> 02b878f289a168805d0fa26d5e2f5922a609b271
             var cantidad = parseInt(cantidadSpan.textContent);
             if (cantidad > 1) {
                 cantidad--;
@@ -186,6 +214,13 @@
             descripcionCell.textContent = descripcion;
             fechaCaducidadCell.textContent = fechaCaducidad;
             cantidadCell.textContent = cantidad;
+
+            // Disminuir la cantidad disponible en la tabla de arriba
+            var filaMedicamento = btn.parentNode.parentNode;
+            var cantidadDisponibleCell = filaMedicamento.querySelector('.cantidad-disponible');
+            var cantidadDisponible = parseInt(cantidadDisponibleCell.textContent);
+            cantidadDisponible -= parseInt(cantidad);
+            cantidadDisponibleCell.textContent = cantidadDisponible;
         }
 
         // Función para filtrar la tabla según la búsqueda
@@ -204,6 +239,13 @@
                 }
             }
         });
+
+        // Función para enviar medicamentos y limpiar la tabla
+        function enviarMedicamentos() {
+            var tableBody = document.getElementById("medicamentosSeleccionados").getElementsByTagName("tbody")[0];
+            tableBody.innerHTML = ''; // Limpiar la tabla de medicamentos seleccionados
+            alert('Medicamentos enviados con éxito'); // Mensaje de confirmación
+        }
     </script>
 </body>
 </html>

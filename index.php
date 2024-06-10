@@ -82,11 +82,17 @@
             // Redirigir según el valor del campo de ID de Usuario
              if (userIDValue === '2') {
                window.location.href = 'interfaz_farmacia.php';
+<<<<<<< HEAD
             } else if (userIDValue === '1') {
               window.location.href = 'ventana2.php';
             } else if (userIDValue === '3') {
               window.location.href = 'usuario_farmacia.php';}
             else {
+=======
+            } else if (userIDValue === '2') {
+              window.location.href = 'usuario_unidades.php';
+            } else {
+>>>>>>> 02b878f289a168805d0fa26d5e2f5922a609b271
     // Manejar otro caso si es necesario
     alert('ID de usuario no válido');
 }

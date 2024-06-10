@@ -45,7 +45,11 @@
 </head>
 <body>
   <header>
+<<<<<<< HEAD
     <a href="gestion_solicitudes.php">
+=======
+    <a href="solicitudes_unidades.php">
+>>>>>>> 02b878f289a168805d0fa26d5e2f5922a609b271
       <button>Solicitudes</button></a>
     <a href="gestion_medicamento.php">
       <button>Inventarios</button></a>
@@ -53,7 +57,11 @@
   
   <main>
     <!-- Aquí se mostraría el contenido relevante -->
+<<<<<<< HEAD
     <h1>Bienvenido a Medired Express</h1>
+=======
+    <h1>Bienvenido a la Medired express</h1>
+>>>>>>> 02b878f289a168805d0fa26d5e2f5922a609b271
     <p>Aquí podrás gestionar tus solicitudes, inventarios y cápsulas.</p>
   </main>
 </body>
